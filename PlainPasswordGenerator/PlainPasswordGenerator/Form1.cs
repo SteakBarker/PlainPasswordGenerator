@@ -29,6 +29,13 @@ namespace PlainPasswordGenerator
 				settings |= (checkBox_UseSpecial.Checked) ? RandomPasswordSettings.useSpecialChars : 0;
 				settings |= (checkBox_UseNumbers.Checked) ? RandomPasswordSettings.useNumbers : 0;
 				textBox_Pass.Text = RandomPassword.GeneratePassword((int)numericUpDown_PassLength.Value, settings);
+			} else {
+				WordedPasswordSettings settings = 0;
+				settings |= (checkBox_UseSpecial.Checked) ? WordedPasswordSettings.useSpecialChars : 0;
+				settings |= (checkBox_UseNumbers.Checked) ? WordedPasswordSettings.useNumbers : 0;
+				settings |= (checkBox_ReplaceVowels.Checked) ? WordedPasswordSettings.replaceVowels : 0;
+				settings |= (checkBox_RandomCaps.Checked) ? WordedPasswordSettings.randomCaps : 0;
+				textBox_Pass.Text = WordedPassword.GeneratePassword((int)numericUpDown_PassLength.Value, settings);
 			}
 		}
 
