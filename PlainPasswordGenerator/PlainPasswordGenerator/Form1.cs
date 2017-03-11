@@ -23,19 +23,9 @@ namespace PlainPasswordGenerator
 
 		private void button_Generate_Click(object sender, EventArgs e){
 			if (comboBox_Type.SelectedIndex == 0) { //0 is random
-				RandomPasswordSettings settings = 0;
-				settings |= (checkBox_UseLower.Checked) ? RandomPasswordSettings.useLowercase : 0;
-				settings |= (checkBox_UseUpper.Checked) ? RandomPasswordSettings.useUppercase : 0;
-				settings |= (checkBox_UseSpecial.Checked) ? RandomPasswordSettings.useSpecialChars : 0;
-				settings |= (checkBox_UseNumbers.Checked) ? RandomPasswordSettings.useNumbers : 0;
-				textBox_Pass.Text = RandomPassword.GeneratePassword((int)numericUpDown_PassLength.Value, settings);
+				textBox_Pass.Text = RandomPassword.GeneratePassword((int)numericUpDown_PassLength.Value, LoadSettings());
 			} else {
-				WordedPasswordSettings settings = 0;
-				settings |= (checkBox_UseSpecial.Checked) ? WordedPasswordSettings.useSpecialChars : 0;
-				settings |= (checkBox_UseNumbers.Checked) ? WordedPasswordSettings.useNumbers : 0;
-				settings |= (checkBox_ReplaceVowels.Checked) ? WordedPasswordSettings.replaceVowels : 0;
-				settings |= (checkBox_RandomCaps.Checked) ? WordedPasswordSettings.randomCaps : 0;
-				textBox_Pass.Text = WordedPassword.GeneratePassword((int)numericUpDown_PassLength.Value, settings);
+				textBox_Pass.Text = WordedPassword.GeneratePassword((int)numericUpDown_PassLength.Value, LoadSettings());
 			}
 		}
 
@@ -54,6 +44,19 @@ namespace PlainPasswordGenerator
 			checkBox_ReplaceVowels.Visible = !random;
 			checkBox_RandomCaps.Visible = !random;
 			numericUpDown_Deviation.Visible = !random;
+		}
+
+		private PasswordSettings LoadSettings() {
+			PasswordSettings settings = 0;
+
+			settings |= (checkBox_UseSpecial.Checked) ? PasswordSettings.useSpecialChars : 0;
+			settings |= (checkBox_UseNumbers.Checked) ? PasswordSettings.useNumbers : 0;
+			settings |= (checkBox_UseLower.Checked) ? PasswordSettings.useLowercase : 0;
+			settings |= (checkBox_UseUpper.Checked) ? PasswordSettings.useUppercase : 0;
+			settings |= (checkBox_ReplaceVowels.Checked) ? PasswordSettings.replaceVowels : 0;
+			settings |= (checkBox_RandomCaps.Checked) ? PasswordSettings.randomCaps : 0;
+
+			return settings;
 		}
 	}
 }

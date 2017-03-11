@@ -7,16 +7,8 @@ using System.Threading.Tasks;
 
 namespace PlainPasswordGenerator {
 
-	[FlagsAttribute]
-	enum WordedPasswordSettings {
-		useSpecialChars = 0,
-		useNumbers = 1,
-		replaceVowels = 2,
-		randomCaps = 4,
-	}
-
 	class WordedPassword {
-		public static String GeneratePassword(int length, WordedPasswordSettings settings) {
+		public static String GeneratePassword(int length, PasswordSettings settings) {
 			string[] words = ReadAllWords();
 			Random ran = new Random();
 
@@ -30,8 +22,8 @@ namespace PlainPasswordGenerator {
 				} else {tries--;}
 			}
 			string charPool = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-			charPool += (settings.HasFlag(WordedPasswordSettings.useNumbers)) ? "1234567890" : "";
-			charPool += (settings.HasFlag(WordedPasswordSettings.useSpecialChars)) ? "!@#$%^&*()" : "";
+			charPool += (settings.HasFlag(PasswordSettings.useNumbers)) ? "1234567890" : "";
+			charPool += (settings.HasFlag(PasswordSettings.useSpecialChars)) ? "!@#$%^&*()" : "";
 
 			for (int i=pass.Length; i<length; i++) {
 				pass = pass.Insert(ran.Next(pass.Length), ""+charPool[ran.Next(charPool.Length)]);
