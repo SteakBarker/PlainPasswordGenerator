@@ -38,7 +38,7 @@ namespace PlainPasswordGenerator
 			if (comboBox_Type.SelectedIndex == 0) { //0 is random
 				textBox_Pass.Text = RandomPassword.GeneratePassword((int)numericUpDown_PassLength.Value, LoadSettings());
 			} else {
-				textBox_Pass.Text = WordedPassword.GeneratePassword((int)numericUpDown_PassLength.Value, LoadSettings());
+				textBox_Pass.Text = WordedPassword.GeneratePassword((int)numericUpDown_PassLength.Value, (int)numericUpDown_RandomChars.Value, LoadSettings());
 			}
 		}
 
@@ -58,6 +58,7 @@ namespace PlainPasswordGenerator
 			settings |= (checkBox_UseUpper.Checked) ? PasswordSettings.useUppercase : 0;
 			settings |= (checkBox_ReplaceVowels.Checked) ? PasswordSettings.replaceVowels : 0;
 			settings |= (checkBox_RandomCaps.Checked) ? PasswordSettings.randomCaps : 0;
+			settings |= (checkBox_InsertRandom.Checked) ? PasswordSettings.insertRandom : 0;
 
 			return settings;
 		}
